@@ -798,17 +798,24 @@ function handle_url_tag($url, $link = '', $bbcode = false)
 function handle_img_tag($url, $is_signature = false, $alt = null)
 {
 	global $lang_common, $pun_user;
-
-	if (is_null($alt))
-		$alt = basename($url);
-
-	$img_tag = '<a href="'.$url.'" rel="nofollow">&lt;'.$lang_common['Image link'].' - '.$alt.'&gt;</a>';
-
-	if ($is_signature && $pun_user['show_img_sig'] != '0')
-		$img_tag = '<img class="sigimage" src="'.$url.'" alt="'.$alt.'" />';
-	else if (!$is_signature && $pun_user['show_img'] != '0')
-		$img_tag = '<span class="postimg"><a href="'.$url.'" target="_blank"><img src="'.$url.'" alt="'.$alt.'" border="0" /></a></span>';
-
+	
+	//verifica se a url termina com .gifv
+	//se sim, retorna um iframe com o gifv correspondente
+	if (preg_match('/\w*.gifv\b/', $url, $matches))
+		$img_tag = '<iframe allowfullscreen="" frameborder="0" scrolling="no"  width="660" height="370" src="'.$url.'#embed"></iframe>';
+		
+	else
+	{
+		if (is_null($alt))
+			$alt = basename($url);
+	
+		$img_tag = '<a href="'.$url.'" rel="nofollow">&lt;'.$lang_common['Image link'].' - '.$alt.'&gt;</a>';
+	
+		if ($is_signature && $pun_user['show_img_sig'] != '0')
+			$img_tag = '<img class="sigimage" src="'.$url.'" alt="'.$alt.'" />';
+		else if (!$is_signature && $pun_user['show_img'] != '0')
+			$img_tag = '<span class="postimg"><a href="'.$url.'" target="_blank"><img src="'.$url.'" alt="'.$alt.'" border="0" /></a></span>';
+	}
 	return $img_tag;
 }
 
