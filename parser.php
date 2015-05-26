@@ -801,7 +801,7 @@ function handle_img_tag($url, $is_signature = false, $alt = null)
 	
 	//verifica se a url termina com .gifv
 	//se sim, retorna um iframe com o gifv correspondente
-	if (preg_match('/\w*.gifv\b /', $url, $matches))
+	if (preg_match('/\w*.gifv\b/', $url, $matches))
 		$img_tag = '<iframe allowfullscreen="" frameborder="0" scrolling="no"  width="660" height="370" src="'.$url.'#embed"></iframe>';
 		
 	else
