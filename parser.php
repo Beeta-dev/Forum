@@ -802,7 +802,7 @@ function handle_img_tag($url, $is_signature = false, $alt = null)
 	//verifica se a url termina com .gifv
 	//se sim, retorna um iframe com o gifv correspondente
 	if (preg_match('/\w*.gifv\b/', $url, $matches))
-		$img_tag = '<iframe allowfullscreen="" frameborder="0" scrolling="no"  width="660" height="370" src="'.$url.'#embed"></iframe>';
+		$img_tag = '<video autoplay loop poster="placeholder.jpg" id="backgroundgif"> <source src="'.$url.'#embed" type="video/webm"></video>';
 		
 	else
 	{
